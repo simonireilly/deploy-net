@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.head_ref }}
-      url: https://${{ github.head_ref }}-deploy-net.netlify.app
+      url: https://${{ github.head_ref | tr / - }}--deploy-net.netlify.app
 
     steps:
       - uses: actions/checkout@v3

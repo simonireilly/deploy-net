@@ -1,2 +1,2 @@
 preview:
-	yarn deploy --dir=./app
+	yarn netlify deploy --dir=app --alias sample
