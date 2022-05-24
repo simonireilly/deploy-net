@@ -18,7 +18,7 @@ jobs:
           cache: 'yarn'
       - run: yarn
       - name: deploy
-        run: yarn deploy --dir=./app --alias ${{ github.head_ref }}
+        run: yarn netlify deploy --dir=./app --alias ${{ github.head_ref }}
         env:
           NETLIFY_SITE_ID: c83bedd0-393d-4294-9d43-6dc626cdedf0
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
