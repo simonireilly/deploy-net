@@ -1,20 +1,18 @@
 name: Deployment
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
 
 jobs:
   deployment:
     runs-on: ubuntu-latest
     environment:
-      name: production
-      url: https://${GITHUB_REF##*/}.com
+      name: ${GITHUB_REF##*/}
+      url: https://${GITHUB_REF##*/}-deploy-net.netlify.app
 
     steps:
       - name: deploy
-        run: yarn deploy --dir=./app
+        run: yarn deploy --dir=./app --alias ${GITHUB_REF##*/}
         env:
           NETLIFY_SITE_ID: c83bedd0-393d-4294-9d43-6dc626cdedf0
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
