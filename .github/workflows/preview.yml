@@ -7,7 +7,7 @@ jobs:
   deployment:
     runs-on: ubuntu-latest
     environment:
-      name: $(echo ${GITHUB_HEAD_REF} | tr / -)
+      name: ${{ github.head_ref }}
       url: https://${GITHUB_REF##*/}-deploy-net.netlify.app
 
     steps:
