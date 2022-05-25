@@ -1,0 +1,27 @@
+name: Deployment
+
+on:
+  pull_request:
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.head_ref }}
+      url: https://${{ github.head_ref }}--deploy-net.netlify.app
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - run: yarn
+
+      - name: deploy
+        run: yarn netlify deploy --dir=app --alias ${{ github.head_ref }}
+        env:
+          NETLIFY_SITE_ID: c83bedd0-393d-4294-9d43-6dc626cdedf0
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
